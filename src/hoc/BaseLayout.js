@@ -21,7 +21,7 @@ class BaseLayout extends Component {
     }
 
     render() {
-        console.log("props", this.props)
+        
         return (
               <div>
                 {this.state.waiting && <Loader/>}
@@ -46,7 +46,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return { 
-
+        dispatch
     }
 };
 
