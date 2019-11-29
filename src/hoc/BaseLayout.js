@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
+import {actions} from '../logic/actions/actions'
 import Loader from "../components/Loader/Loader";
 import Product from "../pages/Products"
 class BaseLayout extends Component {
@@ -6,14 +8,20 @@ class BaseLayout extends Component {
         super(props);
         this.state = {
             waiting: true,
-            
+            page:1
         }
     }
     componentWillMount() {
+        this.onGetProducts(this.state.page)
+    }
 
+
+    onGetProducts = (page, sort) => {
+        this.props.dispatch(actions.getProducts(sort || this.props.sort, page))
     }
 
     render() {
+        console.log("props", this.props)
         return (
               <div>
                 {this.state.waiting && <Loader/>}
@@ -30,8 +38,17 @@ class BaseLayout extends Component {
         );
     }
 };
-/**/
+const mapStateToProps = state => {
+    return {
+        products: state.products
+    }
+};
 
-export default BaseLayout;
+const mapDispatchToProps = dispatch => {
+    return { 
 
-/**/
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BaseLayout);
+

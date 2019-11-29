@@ -1,6 +1,6 @@
 import { request } from '../../services'
 import { types } from './constants'
-import { Config } from '../../utils/config'
+import { Config } from '../../../configuration'
 
 const get = () => ({
     type: types.PRODUCTS_REQUEST
