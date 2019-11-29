@@ -11,8 +11,10 @@ class BaseLayout extends Component {
             page:1
         }
     }
-    componentWillMount() {
+    componentDidMount() {
         this.onGetProducts(this.state.page)
+        const {data} = this.props;
+       
     }
 
 
@@ -21,11 +23,13 @@ class BaseLayout extends Component {
     }
 
     render() {
-        
+        console.log("waiting",this.props)
+        const {loading} = this.props;
+        console.log("loading", loading)
         return (
               <div>
-                {this.state.waiting && <Loader/>}
-                {!this.state.waiting && (
+                {loading && <Loader/>}
+                {!loading && (
                    
                     <Product
                         {...this.props}
@@ -40,7 +44,7 @@ class BaseLayout extends Component {
 };
 const mapStateToProps = state => {
     return {
-        products: state.products
+        ...state.products
     }
 };
 

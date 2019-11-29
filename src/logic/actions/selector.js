@@ -1,18 +1,18 @@
 import { createSelector } from 'reselect'
+import { helpers } from '../../../CommonFunctions'
+import { configuration } from '../../../configuration'
 
-import { Helpers } from '../../utils/helpers'
-import { Config } from '../../utils/config'
+const returnProducts = state => state.products
 
-const getProducts = state => state.products
 
 export const getFormatProducts = createSelector(
-    [getProducts],
+    [returnProducts],
     products => {
         const now = new Date()
         return products.data.map(p => {
             let clone = { ...p }
             const date = new Date(clone.date)
-            const diff = Helpers.diffDays(date, now)
+            const diff = helpers.diffDays(date, now)
 
             switch (diff) {
                 case 0:
@@ -25,7 +25,7 @@ export const getFormatProducts = createSelector(
                     clone.date = `${diff} days ago`
                     break;
             }
-            if (diff > Config.DATE_LIMIT) clone.date = date.toLocaleDateString()
+            if (diff > configuration.DATE_LIMIT) clone.date = date.toLocaleDateString()
 
             clone.price = `$${clone.price}`
 
