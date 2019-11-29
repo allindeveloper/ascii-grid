@@ -1,5 +1,5 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
-import {products} from './reducers';
+import products from './reducers/products';
 import thunk from 'redux-thunk';
 // import {promiseMiddleware} from './middleware';
 // import logger from 'redux-logger';
@@ -20,6 +20,5 @@ const store = createStore(
     reducers,
     applyMiddleware(...middlewares)
 )
-console.log("storesate", store.getState())
 // logger has to be removed later in production
 export default store;

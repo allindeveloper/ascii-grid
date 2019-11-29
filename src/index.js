@@ -5,9 +5,11 @@ import { Provider } from 'react-redux'
 import BaseLayout from './hoc/BaseLayout'
 import store from './logic/store';
 
+console.log("storesate", store.getState())
+
 render(
     <Provider store={store}>
-        <App />
+        <BaseLayout />
     </Provider>,
     document.getElementById('app')
 )
