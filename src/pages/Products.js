@@ -1,23 +1,54 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { helpers } from '../../CommonFunctions'
-
+import {actions} from '../logic/actions/actions'
 import { getFormatProducts } from '../logic/actions/selector'
 import { configuration } from '../../configuration';
-import  "./style.css"
+import "./style.css"
 class Products extends React.Component {
 
     adsKey = {}
     prevKey = 0
     constructor(props) {
         super(props);
+        this.state={
+            page:1
+        }
+    }
+
+    componentDidMount(){
+         window.addEventListener('scroll', this.onScroll, false)
+    }
+
+    componentWillUnmount = () => {
+        window.removeEventListener('scroll', this.onScroll, false);
+    }
+
+    onScroll = () => {
+        const { loading, extra } = this.props
+        console.log("scrooooolllling")
+        let elem = document.getElementById("prod");
+        console.log(elem.innerHeight)
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - configuration.OFFSET_HEIGHT && !loading && extra) {
+            this.setState(prevState => ({ page: prevState.page + 1 }), () => this.onLoadMoreProducts(this.state.page))
+        }
+    }
+
+    
+    onGetProducts = (page, sort) => {
+        this.props.dispatch(actions.getProducts(sort || this.props.sort, page))
+    }
+
+
+    onLoadMoreProducts = (page, sort) => {
+        this.props.dispatch(actions.loadMoreProducts(sort || this.props.sort, page))
     }
 
     renderGrid = (products) => {
         let nodeElems = [];
 
         for (let p in products) {
-            console.log("id",p)
+            console.log("id", p)
             let id = products[p].id;
             let size = products[p].size;
             let face = products[p].face;
@@ -25,19 +56,29 @@ class Products extends React.Component {
             let date = products[p].date;
             nodeElems.push(
                 <React.Fragment key={id}>
-                                <tr>
-                                    <td>{id}</td>
-                                    <td>{size}</td>
-                                    <td style={{ fontSize: size }}>{face}</td>
-                                    <td>{price}</td>
-                                    <td>{date}</td>
-                                </tr>
-                                {p && p === configuration.ADS_PER_ROW ? this.renderAds(id) : null}
+                    <tr>
+                        <td>{id}</td>
+                        <td>{size}</td>
+                        <td style={{ fontSize: size }}>{face}</td>
+                        <td>{price}</td>
+                        <td>{date}</td>
+                    </tr>
+                    {p && p === configuration.ADS_PER_ROW ? this.renderAds(id) : null}
                 </React.Fragment>
             )
         }
 
         return nodeElems;
+    }
+
+    onSortChange = val => {
+        const { sort, loading } = this.props
+        if (sort !== val && !loading) {
+            this.setState({ page: 1 })
+            this.adsKey = {}
+            this.prevKey = 0
+            this.onGetProducts(1, val)
+        }
     }
 
     renderAds = key => {
@@ -51,7 +92,7 @@ class Products extends React.Component {
         return (
             <tr>
                 <td colSpan={5}>
-                    <img src={"/ads/?r=" + rdKey} />
+                    <center><img src={"/ads/?r=" + rdKey} /></center>
                 </td>
             </tr>
         )
@@ -60,13 +101,13 @@ class Products extends React.Component {
 
     render() {
         const { loading, data, extra, sort } = this.props;
-        console.log("props-products", this.props)
-
         return (
             <div>
-                Products
-            <table id="aa_htmlTable">
-                    <thead>
+                <h2>Products</h2>
+                <div className="box" id="prod">
+                <div class="tbl-header">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                        <thead>
                         <tr>
                             <th scope="col"><a onClick={() => this.onSortChange('id')} className={sort === 'id' ? 'sorted' : ''}>Id</a></th>
                             <th scope="col"><a onClick={() => this.onSortChange('size')} className={sort === 'size' ? 'sorted' : ''}>Size</a></th>
@@ -74,39 +115,39 @@ class Products extends React.Component {
                             <th scope="col"><a onClick={() => this.onSortChange('price')} className={sort === 'price' ? 'sorted' : ''}>Price</a></th>
                             <th scope="col">Date</th>
                         </tr>
-                    </thead>
-
-                    {/* <tbody>
+                        </thead>
+                    </table>
+                </div>
+                <div class="tbl-content">
+                    <table cellpadding="0" cellspacing="0" border="0">
                         {
-                            this.renderGrid(data)
+                            data.map((p, index) => (
+                                <tbody key={p.id}>
+                                    {index && index % configuration.ADS_PER_ROW === 0 ? this.renderAds(p.id) : null}
+                                    <tr>
+                                        <td>{p.id}</td>
+                                        <td>{p.size}</td>
+                                        <td style={{ fontSize: p.size }}>{p.face}</td>
+                                        <td>{p.price}</td>
+                                        <td>{p.date}</td>
+                                    </tr>
+                                </tbody>
+                            ))
                         }
-                    </tbody> */}
-                    {
-                        data.map((p, index) => (
-                            <tbody key={p.id}>
-                                {index && index % configuration.ADS_PER_ROW === 0 ? this.renderAds(p.id) : null}
-                                <tr>
-                                    <td>{p.id}</td>
-                                    <td>{p.size}</td>
-                                    <td style={{ fontSize: p.size }}>{p.face}</td>
-                                    <td>{p.price}</td>
-                                    <td>{p.date}</td>
-                                </tr>
-                            </tbody>
-                        ))
-                    }
-
-                    {
+                        {
                         !extra &&
                         <tbody>
                             <tr>
                                 <td colSpan={5}>
-                                    ~ end of catalogue ~
+                                  <center>  <p>~ end of catalogue ~</p></center>
                                 </td>
+                                
                             </tr>
                         </tbody>
                     }
-                </table>
+                    </table>
+                </div>
+                </div>
             </div>
 
         );
