@@ -44,31 +44,6 @@ class Products extends React.Component {
         this.props.dispatch(actions.loadMoreProducts(sort || this.props.sort, page))
     }
 
-    renderGrid = (products) => {
-        let nodeElems = [];
-
-        for (let p in products) {
-            let id = products[p].id;
-            let size = products[p].size;
-            let face = products[p].face;
-            let price = products[p].price;
-            let date = products[p].date;
-            nodeElems.push(
-                <React.Fragment key={id}>
-                    <tr>
-                        <td>{id}</td>
-                        <td>{size}</td>
-                        <td style={{ fontSize: size }}>{face}</td>
-                        <td>{price}</td>
-                        <td>{date}</td>
-                    </tr>
-                    {p && p === configuration.ADS_PER_ROW ? this.renderAds(id) : null}
-                </React.Fragment>
-            )
-        }
-
-        return nodeElems;
-    }
 
     onSortChange = val => {
         const { sort, loading } = this.props
@@ -100,7 +75,6 @@ class Products extends React.Component {
 
     render() {
         const { loading, data, extra, sort } = this.props;
-        console.log("loading ---Products Comp", this.props)
         return (
             <div>
                 <h1>Products</h1>
@@ -124,7 +98,7 @@ class Products extends React.Component {
                     <table cellPadding="0" cellSpacing="0" border="0">
                         {
                             data.map((p, index) => (
-                                <tbody key={p.id}>
+                                <tbody key={index}>
                                     {index && index % configuration.ADS_PER_ROW === 0 ? this.renderAds(p.id) : null}
                                     <tr>
                                         <td>{p.id}</td>

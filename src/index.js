@@ -10,5 +10,5 @@ render(
     <Provider store={store}>
         <BaseLayout />
     </Provider>,
-    document.getElementById('app')
+    document.getElementById('root')
 )

@@ -1,10 +1,6 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import products from './reducers/products';
 import thunk from 'redux-thunk';
-// import {promiseMiddleware} from './middleware';
-// import logger from 'redux-logger';
-// import { composeWithDevTools } from 'redux-devtools-extension';
-
 let middlewares = [thunk]
 
 const reducers = combineReducers({
@@ -13,12 +9,10 @@ const reducers = combineReducers({
 
 if (process.env.NODE_ENV === 'development') {
     const { logger } = require('redux-logger')
-
-    middlewares.push(logger)
+    // middlewares.push(logger) //uncomment this line to show logger in the console
 }
 const store = createStore(
     reducers,
     applyMiddleware(...middlewares)
 )
-// logger has to be removed later in production
 export default store;
