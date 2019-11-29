@@ -19,3 +19,8 @@
 ### Launch App
 - Run  `npm install` 
 - Run `npm start` to see the app at `http://localhost:3000`
+
+### Libraries/Frameworks
+- React
+- WebPack
+- Babel
