@@ -45,7 +45,7 @@ const loadMoreProducts = (sort, page, limit = configuration.PRODUCT_LIMIT) => di
 
     dispatch(loadmore())
 
-    // preload data
+    // Pre-emptively load data
     serviceCall(`products?_page=${page + 1}&_limit=${limit}${sort ? '&_sort=' + sort : ''}`, {}, 'get')
         .then(res => dispatch(preload(res)))
 }

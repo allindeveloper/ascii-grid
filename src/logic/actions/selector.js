@@ -12,7 +12,6 @@ export const getFormatProducts = createSelector(
             let newProd = { ...p }
             const date = new Date(newProd.date)
             const diff = helpers.diffDays(date, now)
-            console.log("diff", diff)
             switch (diff) {
                 case 0:
                     newProd.date = 'Today'

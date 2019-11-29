@@ -100,6 +100,7 @@ class Products extends React.Component {
 
     render() {
         const { loading, data, extra, sort } = this.props;
+        console.log("loading ---Products Comp", this.props)
         return (
             <div>
                 <h1>Products</h1>
@@ -110,10 +111,10 @@ class Products extends React.Component {
                     <table cellPadding="0" cellSpacing="0" border="0">
                         <thead>
                         <tr>
-                            <th scope="col"><a onClick={() => this.onSortChange('id')} className={sort === 'id' ? 'sorted' : ''}>Id <SortIcon/></a></th>
-                            <th scope="col"><a onClick={() => this.onSortChange('size')} className={sort === 'size' ? 'sorted' : ''}>Size <SortIcon/></a></th>
+                            <th scope="col"><a onClick={() => this.onSortChange('id')}>Id <SortIcon/></a></th>
+                            <th scope="col"><a onClick={() => this.onSortChange('size')}>Size <SortIcon/></a></th>
                             <th scope="col">Face</th>
-                            <th scope="col"><a onClick={() => this.onSortChange('price')} className={sort === 'price' ? 'sorted' : ''}>Price <SortIcon/></a></th>
+                            <th scope="col"><a onClick={() => this.onSortChange('price')}>Price <SortIcon/></a></th>
                             <th scope="col">Date</th>
                         </tr>
                         </thead>

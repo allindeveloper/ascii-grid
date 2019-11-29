@@ -16,3 +16,6 @@
 - After every 20 products we insert an advertisement from one of our sponsors. Using the same markup as the advertisement in the header shown in `public/index/html`, but making sure the `?r` query param is randomly generated each time an ad is displayed.
 - Ads are randomly selected, but a user can never see the same ad twice in a row.
 
+### Launch App
+- Run  `npm install` 
+- Run `npm start` to see the app at `http://localhost:3000`

@@ -27,10 +27,9 @@ class BaseLayout extends Component {
     
 
     render() {
-        console.log("waiting",this.props)
         const {loading} = this.props;
         const {waiting} = this.state;
-        console.log("loading", loading)
+        console.log("loading -- BaseLayout", this.props)
         
 
         return (
