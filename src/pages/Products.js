@@ -109,10 +109,10 @@ class Products extends React.Component {
                     <table cellpadding="0" cellspacing="0" border="0">
                         <thead>
                         <tr>
-                            <th scope="col"><a onClick={() => this.onSortChange('id')} className={sort === 'id' ? 'sorted' : ''}>Id</a></th>
-                            <th scope="col"><a onClick={() => this.onSortChange('size')} className={sort === 'size' ? 'sorted' : ''}>Size</a></th>
+                            <th scope="col"><a onClick={() => this.onSortChange('id')} className={sort === 'id' ? 'sorted' : ''}>Id &emsp;<i class="fa fa-angle-double-down"></i></a></th>
+                            <th scope="col"><a onClick={() => this.onSortChange('size')} className={sort === 'size' ? 'sorted' : ''}>Size &emsp;<i class="fa fa-angle-double-down"></i></a></th>
                             <th scope="col">Face</th>
-                            <th scope="col"><a onClick={() => this.onSortChange('price')} className={sort === 'price' ? 'sorted' : ''}>Price</a></th>
+                            <th scope="col"><a onClick={() => this.onSortChange('price')} className={sort === 'price' ? 'sorted' : ''}>Price &emsp;<i class="fa fa-angle-double-down"></i></a></th>
                             <th scope="col">Date</th>
                         </tr>
                         </thead>
