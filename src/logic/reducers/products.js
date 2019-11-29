@@ -5,7 +5,7 @@ const initialState = {
     sort: '',
     data: [],
     preload: [],
-    more: true
+    extra: true
 }
 
 const products =  (state = initialState, action) => {
@@ -20,7 +20,7 @@ const products =  (state = initialState, action) => {
                 ...state,
                 sort: action.sort,
                 loading: false,
-                more: action.data.length > 0,
+                extra: action.data.length > 0,
                 data: action.sort !== state.sort ? action.data : [...state.data, ...action.data]
             }
         case types.PRODUCTS_FAILURE:
@@ -32,7 +32,7 @@ const products =  (state = initialState, action) => {
             return {
                 ...state,
                 preload: action.data,
-                more: action.data.length > 0
+                extra: action.data.length > 0
             }
         case types.PRODUCTS_LOADMORE:
             return {
