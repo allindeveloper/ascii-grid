@@ -1,7 +1,6 @@
 import { createSelector } from 'reselect'
-import { helpers } from '../../../CommonFunctions'
+import { helpers, centToDollar,formatDate } from '../../../CommonFunctions'
 import { configuration } from '../../../configuration'
-
 const returnProducts = state => state.products
 
 
@@ -10,26 +9,27 @@ export const getFormatProducts = createSelector(
     products => {
         const now = new Date()
         return products.data.map(p => {
-            let clone = { ...p }
-            const date = new Date(clone.date)
+            let newProd = { ...p }
+            const date = new Date(newProd.date)
             const diff = helpers.diffDays(date, now)
-
+            console.log("diff", diff)
             switch (diff) {
                 case 0:
-                    clone.date = 'today'
+                    newProd.date = 'Today'
                     break
                 case 1:
-                    clone.date = 'yesterday'
+                    newProd.date = 'Yesterday'
                     break
                 default:
-                    clone.date = `${diff} days ago`
+                    newProd.date = `${diff} Days ago`
                     break;
             }
-            if (diff > configuration.DATE_LIMIT) clone.date = date.toLocaleDateString()
+            if (diff > configuration.DATE_LIMIT) newProd.date = formatDate(date)
+            
 
-            clone.price = `$${clone.price}`
+            newProd.price = `${centToDollar(newProd.price)}`
 
-            return clone
+            return newProd
         })
     }
 )

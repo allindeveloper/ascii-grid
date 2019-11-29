@@ -31,16 +31,27 @@ const handleResponse = response => {
 const keys = Array.from({ length: configuration.ADS_LIMIT_ID }, (_, i) => i + 1)
 
 export const helpers = {
-    diffDays(d1, d2) {
-        var t2 = d2.getTime()
-        var t1 = d1.getTime()
-
-        return parseInt((t2 - t1) / (24 * 3600 * 1000))
+    diffDays(date1, date2) {
+        let difference_in_time = date2.getTime() - date1.getTime();
+        let difference_in_days = difference_in_time / (1000 * 3600 * 24);
+        return parseInt(difference_in_days);
     },
     randomAdsKey(prevKey) {
         const filter = keys.filter(k => k !== prevKey)
         return filter[Math.floor(Math.random() * filter.length)]
     }
+}
+
+export const centToDollar = (cents) => {
+    let dollars = cents / 100;
+    return dollars.toLocaleString("en-US", { style: "currency", currency: "USD" });
+}
+
+export const formatDate = (d) => {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let current_datetime = d;
+    let formatted_date = current_datetime.getDate() + "-" + months[current_datetime.getMonth()] + "-" + current_datetime.getFullYear()
+    return formatted_date;
 }
 
 const handleError = error => Promise.reject(error && error.message)

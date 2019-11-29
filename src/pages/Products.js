@@ -5,6 +5,7 @@ import {actions} from '../logic/actions/actions'
 import { getFormatProducts } from '../logic/actions/selector'
 import { configuration } from '../../configuration';
 import "./style.css"
+import SortIcon from '../components/SortIcon';
 class Products extends React.Component {
 
     adsKey = {}
@@ -26,9 +27,7 @@ class Products extends React.Component {
 
     onScroll = () => {
         const { loading, extra } = this.props
-        console.log("scrooooolllling")
         let elem = document.getElementById("prod");
-        console.log(elem.innerHeight)
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - configuration.OFFSET_HEIGHT && !loading && extra) {
             this.setState(prevState => ({ page: prevState.page + 1 }), () => this.onLoadMoreProducts(this.state.page))
         }
@@ -48,7 +47,6 @@ class Products extends React.Component {
         let nodeElems = [];
 
         for (let p in products) {
-            console.log("id", p)
             let id = products[p].id;
             let size = products[p].size;
             let face = products[p].face;
@@ -105,21 +103,21 @@ class Products extends React.Component {
             <div>
                 <h2>Products</h2>
                 <div className="box" id="prod">
-                <div class="tbl-header">
-                    <table cellpadding="0" cellspacing="0" border="0">
+                <div className="tbl-header">
+                    <table cellPadding="0" cellSpacing="0" border="0">
                         <thead>
                         <tr>
-                            <th scope="col"><a onClick={() => this.onSortChange('id')} className={sort === 'id' ? 'sorted' : ''}>Id &emsp;<i class="fa fa-angle-double-down"></i></a></th>
-                            <th scope="col"><a onClick={() => this.onSortChange('size')} className={sort === 'size' ? 'sorted' : ''}>Size &emsp;<i class="fa fa-angle-double-down"></i></a></th>
+                            <th scope="col"><a onClick={() => this.onSortChange('id')} className={sort === 'id' ? 'sorted' : ''}>Id <SortIcon/></a></th>
+                            <th scope="col"><a onClick={() => this.onSortChange('size')} className={sort === 'size' ? 'sorted' : ''}>Size <SortIcon/></a></th>
                             <th scope="col">Face</th>
-                            <th scope="col"><a onClick={() => this.onSortChange('price')} className={sort === 'price' ? 'sorted' : ''}>Price &emsp;<i class="fa fa-angle-double-down"></i></a></th>
+                            <th scope="col"><a onClick={() => this.onSortChange('price')} className={sort === 'price' ? 'sorted' : ''}>Price <SortIcon/></a></th>
                             <th scope="col">Date</th>
                         </tr>
                         </thead>
                     </table>
                 </div>
-                <div class="tbl-content">
-                    <table cellpadding="0" cellspacing="0" border="0">
+                <div className="tbl-content">
+                    <table cellPadding="0" cellSpacing="0" border="0">
                         {
                             data.map((p, index) => (
                                 <tbody key={p.id}>
