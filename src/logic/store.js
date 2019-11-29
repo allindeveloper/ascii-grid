@@ -20,5 +20,6 @@ const store = createStore(
     reducers,
     applyMiddleware(...middlewares)
 )
+console.log("storesate", store.getState())
 // logger has to be removed later in production
 export default store;
