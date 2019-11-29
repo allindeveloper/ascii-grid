@@ -1,11 +1,15 @@
 
 h1{
     font-size: 30px;
-    color: #fff;
+    color: black;
     text-transform: uppercase;
     font-weight: 300;
-    text-align: center;
+    font-family: roboto,helvetica,sans-serif;
     margin-bottom: 15px;
+  }
+  p{
+    font-family: roboto,helvetica,sans-serif;
+    font-size: 15px !important;
   }
   table{
     width:100%;
@@ -15,8 +19,6 @@ h1{
     background-color: #0000007a;
    }
   .tbl-content{
-    /* height:500px; */
-    /* overflow-x:auto; */
     margin-top: 0px;
     border: 1px solid rgba(255,255,255,0.3);
   }
@@ -46,9 +48,6 @@ h1{
 
   }
   
-  /* demo styles */
-  
-  @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
   body{
     background: -webkit-linear-gradient(left, #25c481, #25b7c4);
     background: linear-gradient(to right, #25c481, #25b7c4);

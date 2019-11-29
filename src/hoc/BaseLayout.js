@@ -8,12 +8,14 @@ class BaseLayout extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            page:1
+            page:1,
+            waiting:true
         }
     }
     componentDidMount() {
         this.onGetProducts(this.state.page)
         const {data} = this.props;
+        this.setState({waiting:false})
     }
 
 
@@ -27,13 +29,14 @@ class BaseLayout extends Component {
     render() {
         console.log("waiting",this.props)
         const {loading} = this.props;
+        const {waiting} = this.state;
         console.log("loading", loading)
         
 
         return (
               <div>
-                {loading && <Loader/>}
-                {!loading && (
+                {waiting && <Loader/>}
+                {!waiting && (
                    
                     <Product
                         {...this.props}

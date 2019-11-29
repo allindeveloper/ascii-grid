@@ -6,6 +6,7 @@ import { getFormatProducts } from '../logic/actions/selector'
 import { configuration } from '../../configuration';
 import "./style.css"
 import SortIcon from '../components/SortIcon';
+import Loader from '../components/Loader/Loader';
 class Products extends React.Component {
 
     adsKey = {}
@@ -101,7 +102,9 @@ class Products extends React.Component {
         const { loading, data, extra, sort } = this.props;
         return (
             <div>
-                <h2>Products</h2>
+                <h1>Products</h1>
+                <p>Here you're sure to find a bargain on some of the finest ascii available to purchase. Be sure to peruse our selection of ascii faces in an exciting range of sizes and prices.</p>
+                {loading && <Loader/>}
                 <div className="box" id="prod">
                 <div className="tbl-header">
                     <table cellPadding="0" cellSpacing="0" border="0">
