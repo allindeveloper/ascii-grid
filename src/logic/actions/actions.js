@@ -18,7 +18,7 @@ const failure = error => ({
 })
 
 const preload = data => ({
-    type: types.PRODUCTS_PRELOAD,
+    type: types.PRELOAD_PRODUCTS,
     data
 })
 

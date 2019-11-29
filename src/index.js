@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import BaseLayout from './hoc/BaseLayout'
 import store from './logic/store';
 
-console.log("storesate", store.getState())
+//console.log("storesate", store.getState())
 
 render(
     <Provider store={store}>

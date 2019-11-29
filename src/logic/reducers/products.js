@@ -28,7 +28,7 @@ const products =  (state = initialState, action) => {
                 ...state,
                 loading: false
             }
-        case types.PRODUCTS_PRELOAD:
+        case types.PRELOAD_PRODUCTS:
             return {
                 ...state,
                 preload: action.data,
