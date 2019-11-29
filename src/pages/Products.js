@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { helpers } from '../../CommonFunctions'
 import {actions} from '../logic/actions/actions'
-import { getFormatProducts } from '../logic/actions/selector'
+import { getFormattedProducts } from '../logic/actions/selector'
 import { configuration } from '../../configuration';
 import "./style.css"
 import SortIcon from '../components/SortIcon';
@@ -159,7 +159,7 @@ class Products extends React.Component {
 
 const mapStateToProps = state => ({
     ...state.products,
-    data: getFormatProducts(state)
+    data: getFormattedProducts(state)
 })
 
 export default connect(mapStateToProps)(Products)

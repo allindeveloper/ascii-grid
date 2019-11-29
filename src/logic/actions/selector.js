@@ -4,7 +4,7 @@ import { configuration } from '../../../configuration'
 const returnProducts = state => state.products
 
 
-export const getFormatProducts = createSelector(
+export const getFormattedProducts = createSelector(
     [returnProducts],
     products => {
         const now = new Date()
