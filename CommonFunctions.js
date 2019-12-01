@@ -6,8 +6,9 @@ export const serviceCall = (path, headers, method, params) => {
         headers: { ...headers, 'Content-Type': 'application/json' },
     }
 
-    if (method !== 'get') options.body = JSON.stringify(params)
-
+    if (method !== 'get') {
+        options.body = JSON.stringify(params)
+    }
     return fetch(`${configuration.SERVICE_BASE_URL}${path}`, options).then(handleResponse, handleError)
 }
 
