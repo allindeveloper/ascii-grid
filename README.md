@@ -10,7 +10,7 @@
     - a "price" column, in cents. Which should be formatted as dollars like `$3.51`.
     - a "date" field, which is the date the product was added to the catalog. Dates should be displayed in relative time (eg. "3 days ago") unless they are older than 1 week, in which case the full date should be displayed. 
 - The products automatically gets updated as you scroll down
-- A animated Loader is added as while users wait for data to load when sorting.
+- A animated Loader is added as while users wait for data to load.
 - Pre-emptively fetch the next batch of results in advance, making use of idle-time.  But they still should not be displayed until the user has scrolled to the bottom of the product grid.
 - When the user reaches the end and there are no more products to display, show the message "~ end of catalogue ~".
 - After every 20 products we insert an advertisement from one of our sponsors. Using the same markup as the advertisement in the header shown in `public/index/html`, but making sure the `?r` query param is randomly generated each time an ad is displayed.
